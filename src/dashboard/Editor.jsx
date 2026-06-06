@@ -31,7 +31,7 @@ export default function Editor() {
   const [busy, setBusy] = useState('')
   const [dirty, setDirty] = useState(false)
   const [error, setError] = useState('')
-  const [recipient, setRecipient] = useState(TEST_RECIPIENTS[0])
+  const [recipient, setRecipient] = useState('maddiesolomon@gmail.com')
   const [sent, setSent] = useState('')
 
   useEffect(() => {

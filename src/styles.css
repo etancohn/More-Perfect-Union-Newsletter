@@ -281,10 +281,40 @@ section{padding:64px 0;}
 /* ---------- DIALOG ---------- */
 dialog.quiz{border:none; padding:0; border-radius:20px; max-width:600px; width:calc(100% - 40px); max-height:92vh; flex-direction:column; background:var(--paper); box-shadow:0 40px 100px -30px rgba(20,20,50,.6); overflow:hidden;}
 dialog.quiz[open]{display:flex;}
-dialog.quiz::backdrop{background:rgba(28,28,55,.55); backdrop-filter:blur(4px);}
+/* Solid tint instead of backdrop-filter:blur — animated/repainted blur
+   re-blurs the whole screen every frame, which made both the open
+   animation and in-dialog hovers janky. A flat dim is effectively free. */
+dialog.quiz::backdrop{background:rgba(22,22,46,.62);}
 @media (prefers-reduced-motion:no-preference){
-  dialog.quiz[open]{animation:dlgIn .35s cubic-bezier(.2,.8,.2,1);}
-  @keyframes dlgIn{from{opacity:0; transform:translateY(16px) scale(.98);}to{opacity:1; transform:none;}}
+  /* Animate the dialog in AND out via transitions on the native <dialog>.
+     Only opacity + transform animate — both run on the compositor, so the
+     motion stays at 60fps. display + overlay use allow-discrete so the
+     element stays painted until the fade/slide finishes. */
+  dialog.quiz{
+    opacity:0; transform:translateY(14px) scale(.985);
+    transition:
+      opacity .3s cubic-bezier(.16,1,.3,1),
+      transform .3s cubic-bezier(.16,1,.3,1),
+      overlay .3s allow-discrete,
+      display .3s allow-discrete;
+  }
+  dialog.quiz[open]{opacity:1; transform:none;}
+  @starting-style{
+    dialog.quiz[open]{opacity:0; transform:translateY(14px) scale(.985);}
+  }
+
+  /* Backdrop just fades its (cheap) solid tint in/out. */
+  dialog.quiz::backdrop{
+    background:rgba(22,22,46,0);
+    transition:
+      background .3s ease,
+      overlay .3s allow-discrete,
+      display .3s allow-discrete;
+  }
+  dialog.quiz[open]::backdrop{background:rgba(22,22,46,.62);}
+  @starting-style{
+    dialog.quiz[open]::backdrop{background:rgba(22,22,46,0);}
+  }
 }
 .qz-head{background:var(--hero-grad); color:#fff; padding:26px 30px 22px; position:relative; flex:none;}
 .qz-head .kk{font-weight:800; letter-spacing:.2em; text-transform:uppercase; font-size:11.5px; color:#ffd2d8; margin:0 0 8px;}

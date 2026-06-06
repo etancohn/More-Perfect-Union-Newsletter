@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import ScrollProgress from './components/ScrollProgress'
 import QuizDialog from './components/QuizDialog'
+import EnvelopeIntro from './components/EnvelopeIntro'
+import { shouldPlayIntro, markIntroSeen } from './lib/intro'
 import Hero from './sections/Hero'
 import Letter from './sections/Letter'
 import Toc from './sections/Toc'
@@ -17,15 +19,24 @@ import { loadStats } from './lib/quiz'
 export default function App() {
   const [quizOpen, setQuizOpen] = useState(false)
   const [stats, setStats] = useState(loadStats)
+  // Decide once, before first paint, whether the envelope intro should play.
+  const [introActive, setIntroActive] = useState(shouldPlayIntro)
 
   const openQuiz = useCallback(() => setQuizOpen(true), [])
 
-  // Auto-open the quiz when arriving from the email's game card (…/#play).
+  // Auto-open the quiz when arriving from the email's game card (…/#play), but
+  // wait until the intro is done — the quiz uses showModal() (top layer) and
+  // would otherwise render above the overlay.
   useEffect(() => {
-    if (window.location.hash === '#play') {
+    if (window.location.hash === '#play' && !introActive) {
       const t = setTimeout(() => setQuizOpen(true), 400)
       return () => clearTimeout(t)
     }
+  }, [introActive])
+
+  const handleIntroDone = useCallback(() => {
+    markIntroSeen()
+    setIntroActive(false)
   }, [])
 
   return (
@@ -49,6 +60,7 @@ export default function App() {
         onClose={() => setQuizOpen(false)}
         onStatsChange={setStats}
       />
+      {introActive && <EnvelopeIntro onDone={handleIntroDone} />}
     </>
   )
 }

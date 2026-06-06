@@ -4,7 +4,8 @@ import PostView from '../post/PostView'
 import Loading from './Loading'
 import { getPostBySlug } from '../lib/posts'
 
-// `/p/:slug` — renders a specific post by slug.
+// `/p/:slug` — renders a specific post by slug. A slug that doesn't match a
+// newsletter shows an "edition not found" message (the default lives at `/`).
 export default function PostPage() {
   const { slug } = useParams()
   const [state, setState] = useState({ status: 'loading', post: null })

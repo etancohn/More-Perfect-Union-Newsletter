@@ -10,6 +10,7 @@ import { firebaseReady } from '../lib/firebase'
 import { getPost, savePost } from '../lib/posts'
 import { renderCards } from '../lib/cards/renderCards'
 import { buildEmailHtml, DEFAULT_BASE } from '../lib/email'
+import { sendTestEmail } from '../lib/sendTest'
 import {
   SECTION_TYPES,
   newSection,
@@ -17,6 +18,8 @@ import {
   blankPost,
   slugify,
 } from '../lib/postSchema'
+
+const TEST_RECIPIENTS = ['etan.cohn@gmail.com', 'maddiesolomon@gmail.com']
 
 export default function Editor() {
   const { id } = useParams()
@@ -28,6 +31,8 @@ export default function Editor() {
   const [busy, setBusy] = useState('')
   const [dirty, setDirty] = useState(false)
   const [error, setError] = useState('')
+  const [recipient, setRecipient] = useState(TEST_RECIPIENTS[0])
+  const [sent, setSent] = useState('')
 
   useEffect(() => {
     let live = true
@@ -52,6 +57,7 @@ export default function Editor() {
   const setPost = (updater) => {
     setPostState((prev) => (typeof updater === 'function' ? updater(prev) : updater))
     setDirty(true)
+    setSent('')
   }
 
   const setField = (k, v) => setPost((p) => ({ ...p, [k]: v }))
@@ -115,6 +121,27 @@ export default function Editor() {
     URL.revokeObjectURL(a.href)
   }
 
+  async function sendTest() {
+    try {
+      setError('')
+      setSent('')
+      setBusy(`Sending test to ${recipient}…`)
+      const html = buildEmailHtml(post, { baseUrl: DEFAULT_BASE })
+      const stamp = new Date().toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      })
+      const subject = `${post.title || 'A More Perfect Union'} (test ${stamp})`
+      await sendTestEmail({ to: recipient, subject, html })
+      setSent(`Sent ✓ to ${recipient}`)
+    } catch (e) {
+      setError(String(e?.message || e))
+    } finally {
+      setBusy('')
+    }
+  }
+
   if (!firebaseReady)
     return <Centered>Firebase isn’t configured. Add your config to <code>.env</code> and restart.</Centered>
   if (loading || !post) return <Loading label="Loading editor…" />
@@ -126,6 +153,7 @@ export default function Editor() {
         <span className="spacer" />
         {busy && <span className="busy">{busy}</span>}
         {error && <span className="err">{error}</span>}
+        {sent && !busy && <span className="busy">{sent}</span>}
         {dirty && !busy && <span className="muted">unsaved changes</span>}
         <button className="btn" disabled={!!busy} onClick={() => handleSave()}>Save draft</button>
         <button className="btn primary" disabled={!!busy} onClick={() => handleSave({ publish: true })}>
@@ -139,6 +167,27 @@ export default function Editor() {
         >
           ⬇ Email HTML{dirty && canDownload ? ' *' : ''}
         </button>
+        <span className="send-test">
+          <select
+            className="send-select"
+            value={recipient}
+            disabled={!!busy}
+            title="Test recipient"
+            onChange={(e) => setRecipient(e.target.value)}
+          >
+            {TEST_RECIPIENTS.map((addr) => (
+              <option key={addr} value={addr}>{addr}</option>
+            ))}
+          </select>
+          <button
+            className="btn"
+            disabled={!!busy}
+            title={dirty ? 'Save first to include the latest email images' : `Send a test to ${recipient}`}
+            onClick={sendTest}
+          >
+            ✉ Send test
+          </button>
+        </span>
       </header>
 
       <div className="editor-grid">

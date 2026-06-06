@@ -2,16 +2,11 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { firebaseReady } from '../lib/firebase'
 import { listPosts, seedCurrentNewsletter, deletePost } from '../lib/posts'
-import { buildEmailHtml, DEFAULT_BASE } from '../lib/email'
-import { sendTestEmail } from '../lib/sendTest'
-
-const TEST_RECIPIENTS = ['etan.cohn@gmail.com', 'maddiesolomon@gmail.com']
 
 export default function Dashboard() {
   const [posts, setPosts] = useState(null)
   const [busy, setBusy] = useState('')
   const [error, setError] = useState('')
-  const [recipient, setRecipient] = useState(TEST_RECIPIENTS[0])
   const navigate = useNavigate()
 
   const load = () => {
@@ -42,25 +37,6 @@ export default function Dashboard() {
     load()
   }
 
-  const sendTest = async (post) => {
-    try {
-      setError('')
-      setBusy(`Sending test to ${recipient}…`)
-      const html = buildEmailHtml(post, { baseUrl: DEFAULT_BASE })
-      const stamp = new Date().toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-      })
-      const subject = `${post.title || 'A More Perfect Union'} (test ${stamp})`
-      await sendTestEmail({ to: recipient, subject, html })
-      setBusy(`Sent ✓ to ${recipient}`)
-    } catch (e) {
-      setError(String(e?.message || e))
-      setBusy('')
-    }
-  }
-
   if (!firebaseReady)
     return (
       <Shell>
@@ -76,14 +52,6 @@ export default function Dashboard() {
       <div className="dash-actions">
         <Link to="/dashboard/new" className="btn primary">+ New post</Link>
         <button className="btn" disabled={!!busy} onClick={seed}>Seed current newsletter</button>
-        <label className="send-to">
-          Send tests to:
-          <select value={recipient} onChange={(e) => setRecipient(e.target.value)}>
-            {TEST_RECIPIENTS.map((addr) => (
-              <option key={addr} value={addr}>{addr}</option>
-            ))}
-          </select>
-        </label>
         {busy && <span className="busy">{busy}</span>}
         {error && <span className="err">{error}</span>}
       </div>
@@ -115,7 +83,6 @@ export default function Dashboard() {
                   </span>
                 </Link>
                 <a className="mini" href={`/p/${p.slug}`} target="_blank" rel="noreferrer">view ↗</a>
-                <button className="mini" disabled={!!busy} onClick={() => sendTest(p)}>send test</button>
                 <button className="mini danger" onClick={() => remove(p.id)}>delete</button>
               </li>
             )

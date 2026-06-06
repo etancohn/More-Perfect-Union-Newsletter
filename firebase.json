@@ -8,10 +8,18 @@
     ],
     "rewrites": [
       {
+        "source": "/api/send-test",
+        "function": "sendTest"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
     ]
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20"
   },
   "firestore": {
     "rules": "firestore.rules"

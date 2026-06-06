@@ -4,6 +4,7 @@ import SectionEditor from './SectionEditor'
 import RichText from './RichText'
 import ImageUpload from './ImageUpload'
 import Preview from './Preview'
+import SectionThumb from './SectionThumb'
 import Loading from '../pages/Loading'
 import { firebaseReady } from '../lib/firebase'
 import { getPost, savePost } from '../lib/posts'
@@ -11,7 +12,6 @@ import { renderCards } from '../lib/cards/renderCards'
 import { buildEmailHtml, DEFAULT_BASE } from '../lib/email'
 import {
   SECTION_TYPES,
-  TYPE_MAP,
   newSection,
   withUniqueAnchors,
   blankPost,
@@ -73,8 +73,12 @@ export default function Editor() {
     })
   const deleteSection = (sid) =>
     setPost((p) => ({ ...p, sections: p.sections.filter((s) => s.id !== sid) }))
-  const addSection = (type) =>
-    setPost((p) => ({ ...p, sections: withUniqueAnchors([...p.sections, newSection(type)]) }))
+  const [openSectionId, setOpenSectionId] = useState(null)
+  const addSection = (type) => {
+    const sec = newSection(type)
+    setOpenSectionId(sec.id) // expand the freshly added section, collapse the rest
+    setPost((p) => ({ ...p, sections: withUniqueAnchors([...p.sections, sec]) }))
+  }
 
   const canDownload = Boolean(post?.id && post?.assets?.editionStrip)
 
@@ -212,6 +216,7 @@ export default function Editor() {
                 section={s}
                 index={i}
                 count={post.sections.length}
+                defaultOpen={post.sections.length <= 1 || s.id === openSectionId}
                 onChange={(sec) => updateSection(s.id, sec)}
                 onMove={(d) => moveSection(s.id, d)}
                 onDelete={() => deleteSection(s.id)}
@@ -294,16 +299,27 @@ function LetterEmail({ post, setLetter }) {
 }
 
 function AddSection({ onAdd }) {
-  const [type, setType] = useState(SECTION_TYPES[0].type)
+  const [open, setOpen] = useState(false)
+  const choose = (type) => {
+    onAdd(type)
+    setOpen(false)
+  }
   return (
     <div className="add-section">
-      <select value={type} onChange={(e) => setType(e.target.value)}>
-        {SECTION_TYPES.map((t) => (
-          <option key={t.type} value={t.type}>{t.label}</option>
-        ))}
-      </select>
-      <button className="btn" onClick={() => onAdd(type)}>+ Add section</button>
-      <p className="muted hint">{TYPE_MAP[type]?.hint}</p>
+      <button className="btn add-section-toggle" onClick={() => setOpen((o) => !o)}>
+        {open ? '× Close' : '+ Add section'}
+      </button>
+      {open && (
+        <div className="section-picker">
+          {SECTION_TYPES.map((t) => (
+            <button key={t.type} type="button" className="tpl-card" onClick={() => choose(t.type)}>
+              <SectionThumb type={t.type} />
+              <span className="tpl-label">{t.label}</span>
+              <span className="tpl-hint">{t.hint}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

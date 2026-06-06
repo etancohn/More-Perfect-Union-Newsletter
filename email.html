@@ -4,9 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="color-scheme" content="light dark" />
+<meta name="supported-color-schemes" content="light dark" />
 <title>A More Perfect Union — Special Election Edition</title>
 <style>
   /* client-safe progressive enhancement only */
+  :root{color-scheme:light dark;}
   body{margin:0;padding:0;background:#e9eaf0;}
   img{border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;display:block;}
   a{text-decoration:none;}
@@ -20,6 +23,20 @@
     .ev-date{width:74px !important;}
     .hpad{height:18px !important;}
   }
+  /* ===== dark mode (Apple Mail, iOS Mail, Outlook, etc.) ===== */
+  @media (prefers-color-scheme: dark){
+    body,.page-bg{background:#15151c !important;}
+    .surface{background:#1f1e27 !important;}
+    .c-head{color:#f1f1f6 !important;}
+    .c-strong{color:#c3c5ff !important;}
+    .c-body{color:#c3c3ce !important;}
+    .c-body2{color:#a6a6b3 !important;}
+    .c-muted{color:#9a9aa6 !important;}
+    .c-faint{color:#8a8a95 !important;}
+    .c-eyebrow{color:#8fb6da !important;}
+    .c-link{color:#f2727f !important;}
+    .c-rule{border-top-color:rgba(255,255,255,.14) !important;}
+  }
 </style>
 </head>
 <body style="margin:0;padding:0;background:#e9eaf0;font-family:Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;">
@@ -27,31 +44,28 @@
 <!-- preheader -->
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#e9eaf0;font-size:1px;line-height:1px;">It's go time — introducing Faith in Fair Elections, our 2026 community strategy. Read the full edition online.</div>
 
-<center style="width:100%;background:#e9eaf0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#e9eaf0;">
+<center class="page-bg" style="width:100%;background:#e9eaf0;">
+<table role="presentation" class="page-bg" width="100%" cellpadding="0" cellspacing="0" style="background:#e9eaf0;">
 <tr><td align="center" style="padding:26px 12px;">
 
   <!-- ============ CONTAINER ============ -->
-  <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(40,40,80,.12);">
+  <table role="presentation" class="container surface" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(40,40,80,.12);">
 
     <!-- HEADER BANNER -->
-    <tr><td style="background:#36357f;background:linear-gradient(105deg,#34337c,#6699bb);">
+    <tr><td bgcolor="#36357f" style="background:#36357f;background:linear-gradient(105deg,#34337c,#6699bb);">
       <img src="assets/header-banner.png" width="600" alt="A More Perfect Union — The Jewish Partnership for Democracy" style="width:100%;height:auto;display:block;" />
     </td></tr>
 
-    <!-- EDITION STRIP -->
-    <tr><td align="center" style="background:linear-gradient(105deg,#3b3a86,#5e8cb0);padding:16px 24px 18px;">
-      <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-        <td style="font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:3px;color:#cfd4ec;padding-right:14px;">PARTNER&nbsp;NEWSLETTER</td>
-        <td style="border-left:1px solid rgba(255,255,255,.3);padding-left:14px;font-family:Georgia,serif;font-size:14px;font-weight:bold;color:#ffffff;">Special Election Edition</td>
-      </tr></table>
+    <!-- EDITION STRIP (image — survives dark-mode recoloring) -->
+    <tr><td style="font-size:0;line-height:0;">
+      <img src="assets/edition-strip.png" width="600" alt="Partner Newsletter — Special Election Edition" style="display:block;width:100%;height:auto;border:0;" />
     </td></tr>
 
     <!-- INTRO -->
     <tr><td class="px" style="padding:34px 44px 8px;">
-      <div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:2px;color:#5e8cb0;text-transform:uppercase;">From the Vice President</div>
-      <div style="font-family:Georgia,serif;font-size:23px;line-height:1.35;color:#23232b;font-weight:bold;margin-top:10px;">It's go time.</div>
-      <p style="font-family:Helvetica,Arial,sans-serif;font-size:15.5px;line-height:1.65;color:#54545f;margin:12px 0 0;">In this special 2026 Midterm Elections edition, we're excited to officially launch <a class="lnk" href="https://more-perfect-union-newsletter.web.app/#fair-elections" style="color:#b72e3f;font-weight:bold;">Faith in Fair Elections</a> — a Jewish community strategy to ensure free, fair, safe, and accessible elections. Here's everything in this issue, in brief.</p>
+      <div class="c-eyebrow" style="font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:2px;color:#5e8cb0;text-transform:uppercase;">From the Vice President</div>
+      <div class="c-head" style="font-family:Georgia,serif;font-size:23px;line-height:1.35;color:#23232b;font-weight:bold;margin-top:10px;">It's go time.</div>
+      <p class="c-body" style="font-family:Helvetica,Arial,sans-serif;font-size:15.5px;line-height:1.65;color:#54545f;margin:12px 0 0;">In this special 2026 Midterm Elections edition, we're excited to officially launch <a class="lnk c-link" href="https://more-perfect-union-newsletter.web.app/#fair-elections" style="color:#b72e3f;font-weight:bold;">Faith in Fair Elections</a> — a Jewish community strategy to ensure free, fair, safe, and accessible elections. Here's everything in this issue, in brief.</p>
     </td></tr>
 
     <!-- READ ONLINE CTA -->
@@ -59,157 +73,135 @@
       <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="border-radius:999px;background:#b72e3f;" class="btn">
         <a href="https://more-perfect-union-newsletter.web.app/" style="display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:bold;color:#ffffff;padding:14px 30px;border-radius:999px;">Read the full edition online &nbsp;›</a>
       </td></tr></table>
-      <div style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#9a9aa3;margin-top:9px;">Animations, the full stories, and today's civics challenge.</div>
+      <div class="c-muted" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#9a9aa3;margin-top:9px;">The full stories, plus today's civics challenge.</div>
     </td></tr>
 
     <!-- divider -->
-    <tr><td class="px" style="padding:30px 44px 0;"><div style="border-top:1px solid #ebe9e1;"></div></td></tr>
+    <tr><td class="px" style="padding:30px 44px 0;"><div class="c-rule" style="border-top:1px solid #ebe9e1;"></div></td></tr>
 
     <!-- ===== 01 FAITH IN FAIR ELECTIONS ===== -->
     <tr><td class="px" style="padding:26px 44px 0;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">01</td>
+        <td class="c-link" style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">01</td>
         <td>
-          <div style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;">Faith in Fair Elections</div>
-          <p style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#54545f;margin:10px 0 0;">Our 2026 community strategy to protect democracy at the midterms, built on five nonpartisan, proven actions: serving as <b style="color:#23232b;font-weight:bold;">poll workers</b> &amp; <b style="color:#23232b;font-weight:bold;">poll chaplains</b>, providing <b style="color:#23232b;font-weight:bold;">legal support</b> to officials, <b style="color:#23232b;font-weight:bold;">building trusted relationships</b>, and being <b style="color:#23232b;font-weight:bold;">trusted messengers</b>.</p>
-          <a class="lnk" href="https://more-perfect-union-newsletter.web.app/#fair-elections" style="display:inline-block;margin-top:12px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">Watch the kick-off &amp; get involved &nbsp;→</a>
+          <div class="c-head" style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;">Faith in Fair Elections</div>
+          <p class="c-body" style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#54545f;margin:10px 0 0;">Our 2026 community strategy to protect democracy at the midterms, built on five nonpartisan, proven actions: serving as <b class="c-head" style="color:#23232b;font-weight:bold;">poll workers</b> &amp; <b class="c-head" style="color:#23232b;font-weight:bold;">poll chaplains</b>, providing <b class="c-head" style="color:#23232b;font-weight:bold;">legal support</b> to officials, <b class="c-head" style="color:#23232b;font-weight:bold;">building trusted relationships</b>, and being <b class="c-head" style="color:#23232b;font-weight:bold;">trusted messengers</b>.</p>
+          <a class="lnk c-link" href="https://more-perfect-union-newsletter.web.app/#fair-elections" style="display:inline-block;margin-top:12px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">Watch the kick-off &amp; get involved &nbsp;→</a>
         </td>
       </tr></table>
     </td></tr>
 
-    <tr><td class="px" style="padding:24px 44px 0;"><div style="border-top:1px solid #ebe9e1;"></div></td></tr>
+    <tr><td class="px" style="padding:24px 44px 0;"><div class="c-rule" style="border-top:1px solid #ebe9e1;"></div></td></tr>
 
     <!-- ===== 02 RESOURCES ===== -->
     <tr><td class="px" style="padding:24px 44px 0;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">02</td>
+        <td class="c-link" style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">02</td>
         <td>
-          <div style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;">Resources &amp; Opportunities</div>
-          <p style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;color:#54545f;margin:10px 0 0;">
-            <b style="color:#36357f;">Toolkits</b> for communications &amp; official outreach&nbsp;· <b style="color:#36357f;">Ignition Grants</b> (up to $3K/org)&nbsp;· the <b style="color:#36357f;">JPD Election Connection</b> group&nbsp;· a shared <b style="color:#36357f;">events calendar</b>&nbsp;· and a dedicated <b style="color:#36357f;">Election Intern</b>.
+          <div class="c-head" style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;">Resources &amp; Opportunities</div>
+          <p class="c-body" style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;color:#54545f;margin:10px 0 0;">
+            <b class="c-strong" style="color:#36357f;">Toolkits</b> for communications &amp; official outreach&nbsp;· <b class="c-strong" style="color:#36357f;">Ignition Grants</b> (up to $3K/org)&nbsp;· the <b class="c-strong" style="color:#36357f;">JPD Election Connection</b> group&nbsp;· a shared <b class="c-strong" style="color:#36357f;">events calendar</b>&nbsp;· and a dedicated <b class="c-strong" style="color:#36357f;">Election Intern</b>.
           </p>
-          <a class="lnk" href="https://more-perfect-union-newsletter.web.app/#resources" style="display:inline-block;margin-top:12px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">Explore all five &nbsp;→</a>
+          <a class="lnk c-link" href="https://more-perfect-union-newsletter.web.app/#resources" style="display:inline-block;margin-top:12px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">Explore all five &nbsp;→</a>
         </td>
       </tr></table>
     </td></tr>
 
-    <tr><td class="px" style="padding:24px 44px 0;"><div style="border-top:1px solid #ebe9e1;"></div></td></tr>
+    <tr><td class="px" style="padding:24px 44px 0;"><div class="c-rule" style="border-top:1px solid #ebe9e1;"></div></td></tr>
 
     <!-- ===== 03 EVENTS ===== -->
     <tr><td class="px" style="padding:24px 44px 0;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">03</td>
-        <td><div style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;">Featured Events</div></td>
+        <td class="c-link" style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">03</td>
+        <td><div class="c-head" style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;">Featured Events</div></td>
       </tr></table>
     </td></tr>
     <!-- event rows -->
     <tr><td class="px" style="padding:16px 44px 0;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
         <tr>
-          <td class="ev-date" valign="top" style="width:88px;background:linear-gradient(135deg,#3b3a86,#5e8cb0);border-radius:10px;padding:12px 6px;text-align:center;">
-            <div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1px;color:#dfe4f3;">JUN</div>
-            <div style="font-family:Georgia,serif;font-size:28px;font-weight:bold;color:#ffffff;line-height:1;">17</div>
-            <div style="font-family:Helvetica,Arial,sans-serif;font-size:10px;color:#dfe4f3;margin-top:3px;">12pm ET</div>
+          <td class="ev-date" valign="top" style="width:88px;">
+            <img src="assets/chip-1.png" width="88" alt="Jun 17 · 12pm ET" style="display:block;width:100%;max-width:88px;height:auto;border:0;" />
           </td>
           <td valign="top" style="padding:2px 0 0 16px;">
-            <div style="font-family:Helvetica,Arial,sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:1.5px;color:#5e8cb0;text-transform:uppercase;">Brewing Community</div>
-            <div style="font-family:Georgia,serif;font-size:17px;font-weight:bold;color:#23232b;margin-top:3px;">Virtual Partner Forum</div>
-            <p style="font-family:Helvetica,Arial,sans-serif;font-size:13.5px;line-height:1.55;color:#6b6b75;margin:5px 0 0;">Connect with leaders across the network — and your coffee is on us.</p>
+            <div class="c-eyebrow" style="font-family:Helvetica,Arial,sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:1.5px;color:#5e8cb0;text-transform:uppercase;">Brewing Community</div>
+            <div class="c-head" style="font-family:Georgia,serif;font-size:17px;font-weight:bold;color:#23232b;margin-top:3px;">Virtual Partner Forum</div>
+            <p class="c-body2" style="font-family:Helvetica,Arial,sans-serif;font-size:13.5px;line-height:1.55;color:#6b6b75;margin:5px 0 0;">Connect with leaders across the network — and your coffee is on us.</p>
           </td>
         </tr>
         <tr><td colspan="2" style="height:14px;line-height:14px;">&nbsp;</td></tr>
         <tr>
-          <td class="ev-date" valign="top" style="width:88px;background:linear-gradient(135deg,#3b3a86,#5e8cb0);border-radius:10px;padding:12px 6px;text-align:center;">
-            <div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1px;color:#dfe4f3;">JUN</div>
-            <div style="font-family:Georgia,serif;font-size:28px;font-weight:bold;color:#ffffff;line-height:1;">24</div>
-            <div style="font-family:Helvetica,Arial,sans-serif;font-size:10px;color:#dfe4f3;margin-top:3px;">1pm ET</div>
+          <td class="ev-date" valign="top" style="width:88px;">
+            <img src="assets/chip-2.png" width="88" alt="Jun 24 · 1pm ET" style="display:block;width:100%;max-width:88px;height:auto;border:0;" />
           </td>
           <td valign="top" style="padding:2px 0 0 16px;">
-            <div style="font-family:Helvetica,Arial,sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:1.5px;color:#5e8cb0;text-transform:uppercase;">Faith in Fair Elections</div>
-            <div style="font-family:Georgia,serif;font-size:17px;font-weight:bold;color:#23232b;margin-top:3px;">Ignition Grants Info Session</div>
-            <p style="font-family:Helvetica,Arial,sans-serif;font-size:13.5px;line-height:1.55;color:#6b6b75;margin:5px 0 0;">Walk through the grant process and the projects we're excited to support.</p>
+            <div class="c-eyebrow" style="font-family:Helvetica,Arial,sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:1.5px;color:#5e8cb0;text-transform:uppercase;">Faith in Fair Elections</div>
+            <div class="c-head" style="font-family:Georgia,serif;font-size:17px;font-weight:bold;color:#23232b;margin-top:3px;">Ignition Grants Info Session</div>
+            <p class="c-body2" style="font-family:Helvetica,Arial,sans-serif;font-size:13.5px;line-height:1.55;color:#6b6b75;margin:5px 0 0;">Walk through the grant process and the projects we're excited to support.</p>
           </td>
         </tr>
         <tr><td colspan="2" style="height:14px;line-height:14px;">&nbsp;</td></tr>
         <tr>
-          <td class="ev-date" valign="top" style="width:88px;background:linear-gradient(135deg,#3b3a86,#5e8cb0);border-radius:10px;padding:12px 6px;text-align:center;">
-            <div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1px;color:#dfe4f3;">JUL</div>
-            <div style="font-family:Georgia,serif;font-size:28px;font-weight:bold;color:#ffffff;line-height:1;">21</div>
-            <div style="font-family:Helvetica,Arial,sans-serif;font-size:10px;color:#dfe4f3;margin-top:3px;">1pm ET</div>
+          <td class="ev-date" valign="top" style="width:88px;">
+            <img src="assets/chip-3.png" width="88" alt="Jul 21 · 1pm ET" style="display:block;width:100%;max-width:88px;height:auto;border:0;" />
           </td>
           <td valign="top" style="padding:2px 0 0 16px;">
-            <div style="font-family:Helvetica,Arial,sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:1.5px;color:#5e8cb0;text-transform:uppercase;">High Holy Days</div>
-            <div style="font-family:Georgia,serif;font-size:17px;font-weight:bold;color:#23232b;margin-top:3px;">Drashing Democracy 2026</div>
-            <p style="font-family:Helvetica,Arial,sans-serif;font-size:13.5px;line-height:1.55;color:#6b6b75;margin:5px 0 0;">Reflection with leading rabbis to inform your High Holy Day sermons.</p>
+            <div class="c-eyebrow" style="font-family:Helvetica,Arial,sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:1.5px;color:#5e8cb0;text-transform:uppercase;">High Holy Days</div>
+            <div class="c-head" style="font-family:Georgia,serif;font-size:17px;font-weight:bold;color:#23232b;margin-top:3px;">Drashing Democracy 2026</div>
+            <p class="c-body2" style="font-family:Helvetica,Arial,sans-serif;font-size:13.5px;line-height:1.55;color:#6b6b75;margin:5px 0 0;">Reflection with leading rabbis to inform your High Holy Day sermons.</p>
           </td>
         </tr>
       </table>
-      <a class="lnk" href="https://more-perfect-union-newsletter.web.app/#events" style="display:inline-block;margin-top:16px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">Register for any event &nbsp;→</a>
+      <a class="lnk c-link" href="https://more-perfect-union-newsletter.web.app/#events" style="display:inline-block;margin-top:16px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">Register for any event &nbsp;→</a>
     </td></tr>
 
-    <tr><td class="px" style="padding:24px 44px 0;"><div style="border-top:1px solid #ebe9e1;"></div></td></tr>
+    <tr><td class="px" style="padding:24px 44px 0;"><div class="c-rule" style="border-top:1px solid #ebe9e1;"></div></td></tr>
 
     <!-- ===== 04 SPOTLIGHT ===== -->
     <tr><td class="px" style="padding:24px 44px 0;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">04</td>
+        <td class="c-link" style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">04</td>
         <td>
-          <div style="font-family:Helvetica,Arial,sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:1.5px;color:#5e8cb0;text-transform:uppercase;">Partner Spotlight · Pittsburgh</div>
-          <div style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;margin-top:4px;">NCJW Pittsburgh</div>
-          <p style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#54545f;margin:10px 0 0;">This spring, NCJW Pittsburgh helped more than <b style="color:#b72e3f;">100 high school students</b> cast their first ballots through its first <b style="color:#23232b;">Vote Block Party</b> — complete with music, food, and student speakers.</p>
-          <a class="lnk" href="https://more-perfect-union-newsletter.web.app/#spotlight" style="display:inline-block;margin-top:12px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">Read the story &nbsp;→</a>
+          <div class="c-eyebrow" style="font-family:Helvetica,Arial,sans-serif;font-size:10.5px;font-weight:bold;letter-spacing:1.5px;color:#5e8cb0;text-transform:uppercase;">Partner Spotlight · Pittsburgh</div>
+          <div class="c-head" style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;margin-top:4px;">NCJW Pittsburgh</div>
+          <p class="c-body" style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#54545f;margin:10px 0 0;">This spring, NCJW Pittsburgh helped more than <b class="c-link" style="color:#b72e3f;">100 high school students</b> cast their first ballots through its first <b class="c-head" style="color:#23232b;">Vote Block Party</b> — complete with music, food, and student speakers.</p>
+          <a class="lnk c-link" href="https://more-perfect-union-newsletter.web.app/#spotlight" style="display:inline-block;margin-top:12px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">Read the story &nbsp;→</a>
         </td>
       </tr></table>
     </td></tr>
 
-    <tr><td class="px" style="padding:24px 44px 0;"><div style="border-top:1px solid #ebe9e1;"></div></td></tr>
+    <tr><td class="px" style="padding:24px 44px 0;"><div class="c-rule" style="border-top:1px solid #ebe9e1;"></div></td></tr>
 
     <!-- ===== 05 HAPPENINGS ===== -->
     <tr><td class="px" style="padding:24px 44px 0;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">05</td>
+        <td class="c-link" style="font-family:Georgia,serif;font-style:italic;font-size:16px;color:#b72e3f;width:34px;vertical-align:top;">05</td>
         <td>
-          <div style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;">Partner Happenings</div>
-          <p style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;color:#54545f;margin:10px 0 0;">
-            <b style="color:#36357f;">NCJW</b> — Vote Your Values 2026&nbsp;· <b style="color:#36357f;">RAC</b> — Every Voice, Every Vote 2026&nbsp;· <b style="color:#36357f;">Repair the World</b> — America250 micro-grants ($250).
+          <div class="c-head" style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#23232b;line-height:1.2;">Partner Happenings</div>
+          <p class="c-body" style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;color:#54545f;margin:10px 0 0;">
+            <b class="c-strong" style="color:#36357f;">NCJW</b> — Vote Your Values 2026&nbsp;· <b class="c-strong" style="color:#36357f;">RAC</b> — Every Voice, Every Vote 2026&nbsp;· <b class="c-strong" style="color:#36357f;">Repair the World</b> — America250 micro-grants ($250).
           </p>
-          <a class="lnk" href="https://more-perfect-union-newsletter.web.app/#happenings" style="display:inline-block;margin-top:12px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">See what partners are up to &nbsp;→</a>
+          <a class="lnk c-link" href="https://more-perfect-union-newsletter.web.app/#happenings" style="display:inline-block;margin-top:12px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#b72e3f;">See what partners are up to &nbsp;→</a>
         </td>
       </tr></table>
     </td></tr>
 
-    <!-- ===== GAME CARD ===== -->
+    <!-- ===== GAME CARD (image — survives dark-mode recoloring) ===== -->
     <tr><td class="px" style="padding:30px 44px 6px;">
-      <a href="https://more-perfect-union-newsletter.web.app/#play" style="text-decoration:none;display:block;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#2a2966;background:linear-gradient(160deg,#2a2966,#45469a 55%,#5e8cb0);border-radius:16px;">
-          <tr><td style="padding:24px 26px;">
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-              <td valign="top" width="78" style="width:78px;padding-right:18px;">
-                <img src="assets/qotd-scroll.png" width="68" height="68" alt="U.S. Constitution scroll" style="display:block;width:68px;height:68px;" />
-              </td>
-              <td valign="top">
-                <div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:2px;color:#ffd2d8;text-transform:uppercase;">★ Question of the Day</div>
-                <div style="font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#ffffff;line-height:1.25;margin-top:7px;">Think you know your democracy?</div>
-                <p style="font-family:Helvetica,Arial,sans-serif;font-size:14.5px;line-height:1.55;color:#dfe2f4;margin:9px 0 0;">A quick, nonpartisan civics challenge — five questions on the rights and institutions behind a more perfect union.</p>
-                <table role="presentation" cellpadding="0" cellspacing="0" style="margin-top:18px;"><tr><td style="background:#ffffff;border-radius:999px;">
-                  <span style="display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:bold;color:#2a2966;padding:13px 26px;border-radius:999px;">Play today's challenge</span>
-                </td></tr></table>
-              </td>
-            </tr></table>
-          </td></tr>
-        </table>
+      <a href="https://more-perfect-union-newsletter.web.app/#play" style="text-decoration:none;display:block;font-size:0;line-height:0;">
+        <img src="assets/qotd-card.png" width="512" alt="Question of the Day — Think you know your democracy? A quick, nonpartisan civics challenge. Play today's challenge." style="display:block;width:100%;max-width:512px;height:auto;border:0;" />
       </a>
     </td></tr>
 
     <!-- FOOTER -->
-    <tr><td style="padding:34px 44px 36px;background:#ffffff;">
-      <div style="border-top:1px solid #ebe9e1;padding-top:26px;text-align:center;">
-        <div style="font-family:Helvetica,Arial,sans-serif;font-size:17px;font-weight:bold;letter-spacing:1px;color:#36357f;">A MORE PERFECT UNION</div>
-        <div style="font-family:Georgia,serif;font-size:14px;color:#86868f;margin-top:3px;">The Jewish Partnership for Democracy</div>
-        <p style="font-family:Helvetica,Arial,sans-serif;font-size:12.5px;line-height:1.6;color:#9a9aa3;margin:18px 0 0;">
+    <tr><td class="surface" bgcolor="#ffffff" style="padding:34px 44px 36px;background:#ffffff;">
+      <div class="c-rule" style="border-top:1px solid #ebe9e1;padding-top:26px;text-align:center;">
+        <div class="c-strong" style="font-family:Helvetica,Arial,sans-serif;font-size:17px;font-weight:bold;letter-spacing:1px;color:#36357f;">A MORE PERFECT UNION</div>
+        <div class="c-muted" style="font-family:Georgia,serif;font-size:14px;color:#86868f;margin-top:3px;">The Jewish Partnership for Democracy</div>
+        <p class="c-muted" style="font-family:Helvetica,Arial,sans-serif;font-size:12.5px;line-height:1.6;color:#9a9aa3;margin:18px 0 0;">
           You're receiving this as a valued partner.<br />
-          Questions? <a class="lnk" href="mailto:info@jewishdemocracy.org" style="color:#b72e3f;font-weight:bold;">info@jewishdemocracy.org</a><br />
-          <span style="font-size:11.5px;color:#b6b6bd;">© 2026 A More Perfect Union · Nonpartisan · &nbsp;<a href="#" style="color:#b6b6bd;">Unsubscribe</a> &nbsp;·&nbsp; <a href="#" style="color:#b6b6bd;">Update preferences</a></span>
+          Questions? <a class="lnk c-link" href="mailto:info@jewishdemocracy.org" style="color:#b72e3f;font-weight:bold;">info@jewishdemocracy.org</a><br />
+          <span class="c-faint" style="font-size:11.5px;color:#b6b6bd;">© 2026 A More Perfect Union · Nonpartisan · &nbsp;<a class="c-faint" href="#" style="color:#b6b6bd;">Unsubscribe</a> &nbsp;·&nbsp; <a class="c-faint" href="#" style="color:#b6b6bd;">Update preferences</a></span>
         </p>
       </div>
     </td></tr>

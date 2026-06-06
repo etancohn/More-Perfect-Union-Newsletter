@@ -50,7 +50,10 @@ if (attachments.length === 0) {
   console.warn('No assets/ images found in email.html — sending without inline images.')
 }
 
-const subject = 'A More Perfect Union — Special Election Edition (test)'
+// Unique subject per send so Gmail doesn't thread tests together — you always
+// see the latest render, and can correlate by the timestamp.
+const stamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+const subject = `A More Perfect Union — Special Election Edition (test ${stamp})`
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',

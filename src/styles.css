@@ -55,6 +55,18 @@ button{font-family:inherit;}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(255,154,166,.22);}50%{box-shadow:0 0 0 7px rgba(255,154,166,.08);}}
 .issue-date{color:rgba(255,255,255,.7); font-size:12px; letter-spacing:.18em; text-transform:uppercase;}
 
+/* hero entrance — runs once, the moment the envelope overlay dissolves.
+   .is-armed holds the strip text hidden beneath the overlay so there's no
+   flash on hand-off; the banner stays painted and only settles on enter. */
+@media (prefers-reduced-motion:no-preference){
+  .hero.is-armed .hero-strip > *{opacity:0;}
+  .hero.is-entering .hero-banner{animation:heroBannerSettle 1.1s cubic-bezier(.2,.7,.2,1) both;}
+  .hero.is-entering .edition-pill{animation:heroTextRise .7s cubic-bezier(.2,.7,.2,1) .12s both;}
+  .hero.is-entering .hero-meta{animation:heroTextRise .7s cubic-bezier(.2,.7,.2,1) .26s both;}
+}
+@keyframes heroBannerSettle{from{transform:scale(1.035);} to{transform:scale(1);}}
+@keyframes heroTextRise{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:none;}}
+
 /* ---------- SECTION SYSTEM ---------- */
 section{padding:64px 0;}
 .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:30px;}
@@ -281,7 +293,11 @@ section{padding:64px 0;}
 .acc-a p a{font-weight:600;}
 
 /* ---------- DIALOG ---------- */
-dialog.quiz{border:none; padding:0; border-radius:20px; max-width:600px; width:calc(100% - 40px); max-height:92vh; flex-direction:column; background:var(--paper); box-shadow:0 40px 100px -30px rgba(20,20,50,.6); overflow:hidden;}
+/* max-height in dvh tracks the *visible* viewport; the vh value is a fallback
+   for browsers without dvh. Plain vh measures the address-bar-hidden viewport,
+   so on mobile it lets the dialog overflow the screen (clipping the close/Next
+   buttons) — dvh keeps the whole card on-screen. */
+dialog.quiz{border:none; padding:0; border-radius:20px; max-width:600px; width:calc(100% - 40px); max-height:92vh; max-height:92dvh; flex-direction:column; background:var(--paper); box-shadow:0 40px 100px -30px rgba(20,20,50,.6); overflow:hidden;}
 dialog.quiz[open]{display:flex;}
 /* Solid tint instead of backdrop-filter:blur — animated/repainted blur
    re-blurs the whole screen every frame, which made both the open
@@ -326,7 +342,12 @@ dialog.quiz::backdrop{background:rgba(22,22,46,.62);}
 .qz-progress{display:flex; gap:6px; margin-top:16px;}
 .qz-progress i{height:4px; flex:1; border-radius:2px; background:rgba(255,255,255,.25); transition:background .3s;}
 .qz-progress i.on{background:#fff;}
-.qz-body{padding:28px 30px 30px; overflow-y:auto; flex:1;}
+/* flex-basis must be `auto` (not the 0% that `flex:1` shorthand implies): the
+   native <dialog> is fit-content height, and a 0-basis child collapses to ~0
+   inside an auto-height flex column on iOS Safari. `1 1 auto` sizes the body to
+   its content, then caps+scrolls when the dialog hits max-height. min-height:0
+   lets it shrink below content size so the inner scroll engages. */
+.qz-body{padding:28px 30px 30px; overflow-y:auto; flex:1 1 auto; min-height:0;}
 .qz-q{font-family:var(--serif); font-size:22px; font-weight:600; line-height:1.3; margin:0 0 20px;}
 .qz-opts{display:flex; flex-direction:column; gap:11px;}
 .qz-opt{display:flex; gap:14px; align-items:center; text-align:left; padding:15px 18px; border:1.5px solid var(--line); border-radius:12px; background:var(--paper); font-family:var(--sans); font-size:16.5px; color:var(--ink); cursor:pointer; transition:border-color .2s, background .2s, transform .15s;}
@@ -378,6 +399,21 @@ footer .fine{font-size:12.5px; color:rgba(255,255,255,.45); margin-top:18px;}
   .ev{grid-template-columns:84px 1fr; gap:18px;}
   .ev .body{padding-right:18px;}
   .spot-stats{gap:24px;}
+
+  /* Quiz dialog: fit the visible viewport and tighten chrome on small screens
+     so the header, body, and footer all stay reachable without clipping. */
+  dialog.quiz{width:calc(100% - 24px); max-height:90vh; max-height:90dvh; border-radius:16px;}
+  .qz-head{padding:20px 22px 16px;}
+  .qz-head h3{font-size:21px;}
+  .qz-close{top:14px; right:14px;}
+  .qz-progress{margin-top:14px;}
+  .qz-body{padding:22px 20px 24px;}
+  .qz-q{font-size:20px; margin-bottom:18px;}
+  .qz-opt{padding:13px 15px; font-size:16px;}
+  .qz-explain.show{max-height:340px;}
+  .qz-result .big{font-size:46px;}
+  .qz-result h3{font-size:23px;}
+  .qz-meta .m{padding:11px 14px; min-width:74px;}
 }
 
 /* ====================================================================== */

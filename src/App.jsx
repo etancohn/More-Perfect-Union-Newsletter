@@ -21,6 +21,10 @@ export default function App() {
   const [stats, setStats] = useState(loadStats)
   // Decide once, before first paint, whether the envelope intro should play.
   const [introActive, setIntroActive] = useState(shouldPlayIntro)
+  // Once the envelope dissolves, let the hero animate itself in. Only true when
+  // the intro actually played — a static load (already seen / reduced motion)
+  // leaves the hero fully visible with no entrance.
+  const [heroEntered, setHeroEntered] = useState(false)
 
   const openQuiz = useCallback(() => setQuizOpen(true), [])
 
@@ -37,13 +41,14 @@ export default function App() {
   const handleIntroDone = useCallback(() => {
     markIntroSeen()
     setIntroActive(false)
+    setHeroEntered(true) // hand off to the hero's entrance animation
   }, [])
 
   return (
     <>
       <ScrollProgress />
       <div className="page">
-        <Hero />
+        <Hero armed={introActive} entered={heroEntered} />
         <Letter />
         <Toc />
         <Feature />

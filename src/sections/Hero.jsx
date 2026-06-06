@@ -1,6 +1,9 @@
-export default function Hero() {
+export default function Hero({ armed = false, entered = false }) {
+  // armed: held hidden beneath the envelope overlay (no flash on hand-off).
+  // entered: the envelope has dissolved — play the entrance. Neither → static.
+  const cls = entered ? 'hero is-entering' : armed ? 'hero is-armed' : 'hero'
   return (
-    <header className="hero">
+    <header className={cls}>
       <img
         className="hero-banner"
         src="/assets/header-banner.png"

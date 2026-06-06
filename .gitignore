@@ -7,3 +7,8 @@ dist-ssr
 !.env.example
 .DS_Store
 .vite
+
+# scratch/temp render artifacts
+_render.html
+_shot.mjs
+_email-*.png

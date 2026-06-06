@@ -1,2 +1,5 @@
 # TO DEPLOY:
 npm run build && firebase deploy --only hosting
+
+# TO SEND EMAIL:
+node --env-file=.env send-test.mjs

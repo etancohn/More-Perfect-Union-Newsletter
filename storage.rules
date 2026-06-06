@@ -1,0 +1,14 @@
+rules_version = '2';
+
+// ⚠️ TEMPORARY — UNAUTHENTICATED ACCESS (see firestore.rules).
+// Post images + client-rendered gradient cards live under posts/{postId}/.
+// Reads are public (these are referenced by the live site and emails).
+// Before real use, gate `write` behind Firebase Auth.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /posts/{postId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

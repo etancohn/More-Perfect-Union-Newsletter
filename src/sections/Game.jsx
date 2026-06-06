@@ -1,5 +1,7 @@
 import Reveal from '../components/Reveal'
 
+const LETTERS = ['A', 'B', 'C', 'D']
+
 function StatRow({ stats }) {
   if (stats?.plays) {
     return (
@@ -23,9 +25,10 @@ function StatRow({ stats }) {
   )
 }
 
-export default function Game({ openQuiz, stats }) {
+export default function Game({ data, num = '07', anchor = 'game', openQuiz, stats }) {
+  const preview = (data.questions || [])[0]
   return (
-    <section className="game" id="game">
+    <section className="game" id={anchor}>
       <div className="wrap">
         <div className="game-card">
           <Reveal className="game-copy">
@@ -61,14 +64,11 @@ export default function Game({ openQuiz, stats }) {
                 <circle cx="72" cy="19.5" r="3.8" fill="none" stroke="#C9B583" strokeWidth="2" />
               </svg>
               <div className="game-head-txt">
-                <p className="kk">07 · Question of the Day</p>
-                <h2>Think you know your democracy?</h2>
+                <p className="kk">{num} · {data.kicker}</p>
+                <h2>{data.heading}</h2>
               </div>
             </div>
-            <p>
-              A quick, nonpartisan civics challenge — five questions on the institutions, rights, and
-              history that make a more perfect union. New questions each day.
-            </p>
+            <p>{data.blurb}</p>
             <div className="game-stats">
               <StatRow stats={stats} />
             </div>
@@ -86,18 +86,12 @@ export default function Game({ openQuiz, stats }) {
             aria-label="Play today's civics challenge"
           >
             <span className="gv-tag">★ Today's question</span>
-            <p className="gv-q">
-              How many U.S. states must ratify a constitutional amendment for it to be adopted?
-            </p>
-            <div className="gv-opt">
-              <span className="k">A</span> Two-thirds (34)
-            </div>
-            <div className="gv-opt">
-              <span className="k">B</span> Three-quarters (38)
-            </div>
-            <div className="gv-opt">
-              <span className="k">C</span> A simple majority (26)
-            </div>
+            <p className="gv-q">{preview?.q}</p>
+            {(preview?.opts || []).map((o, i) => (
+              <div className="gv-opt" key={i}>
+                <span className="k">{LETTERS[i]}</span> {o}
+              </div>
+            ))}
             <span className="gv-cta">Tap to play all five →</span>
           </Reveal>
         </div>

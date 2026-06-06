@@ -11,7 +11,8 @@ import {
 
 const LETTERS = ['A', 'B', 'C', 'D']
 
-export default function QuizDialog({ open, onClose, onStatsChange }) {
+export default function QuizDialog({ open, onClose, onStatsChange, questions }) {
+  const QS = questions && questions.length ? questions : QUESTIONS
   const dialogRef = useRef(null)
   const bodyRef = useRef(null)
   const nextRef = useRef(null)
@@ -44,8 +45,8 @@ export default function QuizDialog({ open, onClose, onStatsChange }) {
     }
   }, [open, reset])
 
-  const item = QUESTIONS[qi]
-  const isLast = qi === QUESTIONS.length - 1
+  const item = QS[qi]
+  const isLast = qi === QS.length - 1
   const answered = chosen !== null
 
   const choose = useCallback(
@@ -125,10 +126,10 @@ export default function QuizDialog({ open, onClose, onStatsChange }) {
   let resultMsg = '',
     resultSub = ''
   if (done) {
-    if (score === 5) {
+    if (score === QS.length) {
       resultMsg = 'Founding-level!'
       resultSub = 'A perfect score. You know your civics cold.'
-    } else if (score >= 3) {
+    } else if (score >= Math.ceil(QS.length * 0.6)) {
       resultMsg = 'Well informed.'
       resultSub = 'Strong work — a few to brush up on. Come back tomorrow!'
     } else {
@@ -141,12 +142,12 @@ export default function QuizDialog({ open, onClose, onStatsChange }) {
     <dialog className="quiz" ref={dialogRef} onClose={onClose} onCancel={onClose}>
       <div className="qz-head">
         <p className="kk">★ Question of the Day</p>
-        <h3>{done ? 'Your results' : `Question ${qi + 1} of ${QUESTIONS.length}`}</h3>
+        <h3>{done ? 'Your results' : `Question ${qi + 1} of ${QS.length}`}</h3>
         <button className="qz-close" onClick={onClose} aria-label="Close">
           ×
         </button>
         <div className="qz-progress">
-          {QUESTIONS.map((_, i) => (
+          {QS.map((_, i) => (
             <i key={i} className={done || i <= qi ? 'on' : ''} />
           ))}
         </div>
@@ -180,7 +181,7 @@ export default function QuizDialog({ open, onClose, onStatsChange }) {
             />
             <div className="qz-foot">
               <span className="qz-score">
-                Score <b>{score}</b> / {QUESTIONS.length}
+                Score <b>{score}</b> / {QS.length}
               </span>
               <button
                 ref={nextRef}
@@ -194,13 +195,13 @@ export default function QuizDialog({ open, onClose, onStatsChange }) {
         ) : (
           <div className="qz-result">
             {rec?.newBest && <div className="qz-newbest">★ New personal best!</div>}
-            <div className="big">{score}/5</div>
+            <div className="big">{score}/{QS.length}</div>
             <div className="lbl">questions correct</div>
             <h3>{resultMsg}</h3>
             <p>{resultSub}</p>
             <div className="qz-meta">
               <div className="m">
-                <div className="n">{rec?.best}/5</div>
+                <div className="n">{rec?.best}/{QS.length}</div>
                 <div className="l">Best score</div>
               </div>
               <div className="m">

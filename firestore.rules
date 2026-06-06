@@ -1,0 +1,16 @@
+rules_version = '2';
+
+// ⚠️ TEMPORARY — UNAUTHENTICATED ACCESS.
+// The /dashboard is intentionally open to anyone for now (per project decision).
+// Before any real/public use, lock this down with Firebase Auth:
+//   - keep `read` open (posts are public content),
+//   - restrict `write` to authenticated admins, e.g.
+//       allow write: if request.auth != null && request.auth.token.admin == true;
+// See the firebase-security-rules-auditor skill.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /posts/{postId} {
+      allow read, write: if true;
+    }
+  }
+}
